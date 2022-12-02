@@ -1,5 +1,5 @@
 # Week 5 final assessment BACKEND
-Create a forum app!
+Create a thread app!
 
 ## Done by
 Adrià Rubio
