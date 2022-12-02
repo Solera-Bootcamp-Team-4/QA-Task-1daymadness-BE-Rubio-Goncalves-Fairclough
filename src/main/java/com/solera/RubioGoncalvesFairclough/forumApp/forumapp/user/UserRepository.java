@@ -23,7 +23,6 @@ public class UserRepository {
     }
 
     /**
-     *
      * @param user The user you want to insert to the database
      */
     public void insertUser(User user) {

@@ -21,32 +21,23 @@ public class UserService {
 
 
     /**
-     *
      * @param username The username of the user you want to delete
      * @return Could the user be deleted?
      */
     public boolean deleteUser(String username) {
-        if (!userRepository.existsByUsername(username)) {
-            return false;
-        }
-
         userRepository.removeUserByUsername(username);
         return true;
     }
 
 
     /**
-     *
      * @param user The user you want to create
      * @return could the user be created?
      */
     public boolean createUser(User user) {
-        if (userRepository.existsByUsername(user.getUsername())) {
-            userRepository.insertUser(user);
-            return true;
-        }
-
-        return false;
+        if (userRepository.existsByUsername(user.getUsername())) return false;
+        userRepository.insertUser(user);
+        return true;
     }
 
 }

@@ -19,14 +19,13 @@ public class UserController {
      *
      * @return the complete list of users
      */
-    @GetMapping
     @RequestMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @RequestMapping("/user")
-    public ResponseEntity<?> getUser(@RequestParam String username) {
+    @RequestMapping("/user/{username}")
+    public ResponseEntity<?> getUser(@PathVariable String username) {
         User user = userService.getUser(username);
         System.out.println(username);
         return user != null
@@ -36,15 +35,14 @@ public class UserController {
     }
 
     @PostMapping("/user/new")
-    public ResponseEntity<String> create(@RequestBody User user){
-            return userService.createUser(user)
-                    ? new ResponseEntity<>("User created successfuly", HttpStatus.OK)
-                    : new ResponseEntity<>("Username already exists", HttpStatus.CONFLICT);
+    public ResponseEntity<User> create(@RequestBody User user) {
+        return userService.createUser(user)
+                ? new ResponseEntity<>(userService.getUser(user.getUsername()), HttpStatus.CREATED)
+                : new ResponseEntity<>(userService.getUser(user.getUsername()), HttpStatus.CONFLICT);
     }
 
-    @DeleteMapping
-    @RequestMapping("/user/delete/{username}")
-    public ResponseEntity<String> delete(@PathVariable("username") String username){
+    @DeleteMapping("/user/{username}/delete")
+    public ResponseEntity<String> delete(@PathVariable("username") String username) {
         return userService.deleteUser(username)
                 ? new ResponseEntity<>("User deleted successfuly", HttpStatus.OK)
                 : new ResponseEntity<>("Username doesn't exist", HttpStatus.NO_CONTENT);
