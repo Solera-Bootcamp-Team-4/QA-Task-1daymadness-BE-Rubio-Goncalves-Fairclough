@@ -1,5 +1,5 @@
 # Week 5 final assessment BACKEND
-Create a thread app!
+Create a forum app!
 
 ## Done by
 - Adrià Rubio (adria.rubio@solera.com)
@@ -42,5 +42,5 @@ Plus every controller has 100% coverage :D
 
 ### API todo
 The threads api is not as intended.
-It should be accessible via its parent forum, like:
+It should be accessible via its parent forum, like so:
 - GET /api/forum/{name}/thread/{id}
